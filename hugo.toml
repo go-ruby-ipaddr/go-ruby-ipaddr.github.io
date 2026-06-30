@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-ipaddr.github.io/"
+title = "go-ruby-ipaddr"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Parsing"
+  status = "ready"
+  blurb = "`\"a.b.c.d\"`, `\"addr/prefixlen\"`, `\"addr/netmask\"`, bracketed IPv6 (`\"[::1]/64\"`), `%zone` identifiers and embedded IPv4 tails (`\"::ffff:1.2.3.4\"`), with MRI's ambiguous-zero-fill and out-of-range octet rejections."
+[[params.phases]]
+  name = "Formatting"
+  status = "ready"
+  blurb = "`to_s` (compact, with MRI's exact zero-run collapsing and the `::a.b.c.d` / `::ffff:a.b.c.d` rewrites), `to_string` (canonical expanded), `cidr`, `inspect` (`#<IPAddr: IPv4:…/mask>`) and `netmask`."
+[[params.phases]]
+  name = "Masking & membership"
+  status = "ready"
+  blurb = "`mask(prefixlen|netmask)`, `prefix` / `prefix=`, masked construction with non-contiguous-netmask rejection; `include?` / `===`, `to_range`, and an idiomatic `Each` over the range."
+[[params.phases]]
+  name = "Bitwise & arithmetic"
+  status = "ready"
+  blurb = "`&`, `|`, `~`, `+`, `-`, `succ`, and `Xor` (the natural completion of the `&`/`|` set), all coercing strings / integers / `IPAddr`, carried in `math/big.Int` over the full 128-bit space."
+[[params.phases]]
+  name = "Comparison, predicates & conversions"
+  status = "ready"
+  blurb = "`<=>` (Comparable), `==`, `Hash`; `ipv4?` / `ipv6?` / `loopback?` / `private?` / `link_local?` / `ipv4_mapped?` / `ipv4_compat?`; `native` / `ipv4_mapped` / `ipv4_compat` / `hton` / `ntop` / `new_ntoh` / `family` / `to_i`; the `InvalidAddressError` / `InvalidPrefixError` / `AddressFamilyError` family."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "A wide corpus parsed and formatted here and compared to the system `ruby -ripaddr` — strings, predicates, operators, `to_range`, conversions, error class + message. 100% coverage, gofmt + go vet clean, green across all six 64-bit Go arches and three OSes."
